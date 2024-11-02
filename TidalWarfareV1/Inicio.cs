@@ -19,7 +19,7 @@ namespace TidalWarfareV1
 
         private void btnJugar_Click(object sender, EventArgs e)
         {
-
+            Console.WriteLine("Hola lihndo");
         }
 
         private void btnRanking_Click(object sender, EventArgs e)
