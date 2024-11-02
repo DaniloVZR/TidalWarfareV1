@@ -19,7 +19,9 @@ namespace TidalWarfareV1
 
         private void btnJugar_Click(object sender, EventArgs e)
         {
-
+            Jugar Jugar = new Jugar();
+            Jugar.Show();
+            this.Close();
         }
 
         private void btnRanking_Click(object sender, EventArgs e)
@@ -28,6 +30,11 @@ namespace TidalWarfareV1
         }
 
         private void btnControles_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Inicio_Load(object sender, EventArgs e)
         {
 
         }
