@@ -21,22 +21,14 @@ namespace TidalWarfareV1
         {
             Jugar Jugar = new Jugar();
             Jugar.Show();
-            this.Close();
+            this.Hide();          
         }
 
         private void btnRanking_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnControles_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Inicio_Load(object sender, EventArgs e)
-        {
-
+            Ranking ranking = new Ranking();
+            ranking.Show();
+            this.Hide();
         }
     }
 }

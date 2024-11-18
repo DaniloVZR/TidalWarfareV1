@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio.cs" />
+    <Compile Include="Bala.cs" />
+    <Compile Include="Entidad.cs" />
+    <Compile Include="Explosion.cs" />
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,10 +63,34 @@
     <Compile Include="Jugar.Designer.cs">
       <DependentUpon>Jugar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mapa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapa.Designer.cs">
+      <DependentUpon>Mapa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mina.cs" />
+    <Compile Include="Navio.cs" />
+    <Compile Include="ObjetoGrafico.cs" />
+    <Compile Include="PowerUpCuracion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ranking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ranking.Designer.cs">
+      <DependentUpon>Ranking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Roca.cs" />
+    <Compile Include="Tablero.cs" />
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Jugar.resx">
+      <DependentUpon>Jugar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapa.resx">
+      <DependentUpon>Mapa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -71,7 +100,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Ranking.resx">
+      <DependentUpon>Ranking.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -84,6 +117,46 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BG-inicio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\BackgroundHome.jpg" />
+    <None Include="Resources\Maintheme.wav" />
+    <None Include="Resources\put_bom.wav" />
+    <None Include="Resources\Explosion.wav" />
+    <None Include="Resources\NavioVerde.png" />
+    <None Include="Resources\NavioSoloVerde.png" />
+    <None Include="Resources\NavioSoloRojo.png" />
+    <None Include="Resources\NavioSoloNaranja.png" />
+    <None Include="Resources\NavioSoloMorado.png" />
+    <None Include="Resources\NavioSoloGris.png" />
+    <None Include="Resources\NavioSoloCafe.png" />
+    <None Include="Resources\NavioRojo.png" />
+    <None Include="Resources\NavioNaranja.png" />
+    <None Include="Resources\NavioMorado.png" />
+    <None Include="Resources\NavioGris.png" />
+    <None Include="Resources\NavioCafe.png" />
+    <None Include="Resources\Explosion.png" />
+    <None Include="Resources\Circle_explosion10.png" />
+    <None Include="Resources\Circle_explosion9.png" />
+    <None Include="Resources\Circle_explosion8.png" />
+    <None Include="Resources\Circle_explosion7.png" />
+    <None Include="Resources\Circle_explosion6.png" />
+    <None Include="Resources\Circle_explosion5.png" />
+    <None Include="Resources\Circle_explosion4.png" />
+    <None Include="Resources\Circle_explosion3.png" />
+    <None Include="Resources\Circle_explosion2.png" />
+    <None Include="Resources\Circle_explosion1.png" />
+    <None Include="Resources\Mina.png" />
+    <None Include="Resources\Botiquin.png" />
+    <None Include="Resources\Bala.png" />
+    <None Include="Resources\Krakensote.png" />
+    <None Include="Resources\Roca.png" />
+    <None Include="Resources\kraken.png" />
+    <None Include="Resources\BG-Mapa.png" />
+    <None Include="Resources\TidalWarfareIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
