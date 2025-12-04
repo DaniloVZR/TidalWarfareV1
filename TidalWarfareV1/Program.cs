@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TidalWarfareV1
@@ -17,6 +14,14 @@ namespace TidalWarfareV1
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Inicio());
+        }
+
+        public static class InformacionJugadores
+        {
+            public static string colorNavio1 = "NavioVerde";
+            public static string colorNavio2 = "NavioGris";
+            public static string jugador1 = "";
+            public static string jugador2 = "";
         }
     }
 }

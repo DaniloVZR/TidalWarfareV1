@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.btnJugar = new System.Windows.Forms.Button();
             this.btnRanking = new System.Windows.Forms.Button();
-            this.btnControles = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnJugar
             // 
-            this.btnJugar.Location = new System.Drawing.Point(356, 285);
+            this.btnJugar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJugar.Location = new System.Drawing.Point(345, 283);
             this.btnJugar.Name = "btnJugar";
-            this.btnJugar.Size = new System.Drawing.Size(75, 23);
+            this.btnJugar.Size = new System.Drawing.Size(150, 25);
             this.btnJugar.TabIndex = 0;
             this.btnJugar.Text = "Jugar";
             this.btnJugar.UseVisualStyleBackColor = true;
@@ -46,30 +47,23 @@
             // 
             // btnRanking
             // 
-            this.btnRanking.Location = new System.Drawing.Point(356, 314);
+            this.btnRanking.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRanking.Location = new System.Drawing.Point(345, 314);
             this.btnRanking.Name = "btnRanking";
-            this.btnRanking.Size = new System.Drawing.Size(75, 23);
+            this.btnRanking.Size = new System.Drawing.Size(150, 25);
             this.btnRanking.TabIndex = 1;
             this.btnRanking.Text = "Ranking";
             this.btnRanking.UseVisualStyleBackColor = true;
             this.btnRanking.Click += new System.EventHandler(this.btnRanking_Click);
             // 
-            // btnControles
-            // 
-            this.btnControles.Location = new System.Drawing.Point(356, 343);
-            this.btnControles.Name = "btnControles";
-            this.btnControles.Size = new System.Drawing.Size(75, 23);
-            this.btnControles.TabIndex = 2;
-            this.btnControles.Text = "Controles";
-            this.btnControles.UseVisualStyleBackColor = true;
-            this.btnControles.Click += new System.EventHandler(this.btnControles_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(353, 103);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(226, 115);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 13);
+            this.label1.Size = new System.Drawing.Size(426, 55);
             this.label1.TabIndex = 3;
             this.label1.Text = "TIDAL WARFARE";
             // 
@@ -77,13 +71,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackgroundImage = global::TidalWarfareV1.Properties.Resources.BG_inicio;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(834, 461);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnControles);
             this.Controls.Add(this.btnRanking);
             this.Controls.Add(this.btnJugar);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Inicio";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Tidal Warfare";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -93,7 +91,6 @@
 
         private System.Windows.Forms.Button btnJugar;
         private System.Windows.Forms.Button btnRanking;
-        private System.Windows.Forms.Button btnControles;
         private System.Windows.Forms.Label label1;
     }
 }

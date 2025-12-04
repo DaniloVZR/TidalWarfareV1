@@ -19,17 +19,17 @@ namespace TidalWarfareV1
 
         private void btnJugar_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Hola lihndo");
+            Jugar Jugar = new Jugar();
+            Jugar.Show();
+            this.Hide();          
         }
 
         private void btnRanking_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnControles_Click(object sender, EventArgs e)
-        {
-
+            Ranking ranking = new Ranking();
+            ranking.Inicio = this;
+            ranking.Show();
+            this.Hide();
         }
     }
 }
