@@ -169,6 +169,12 @@
   <data name="Explosion1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Explosion.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Fix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Fix.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="impacto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\impacto.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Maintheme" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Maintheme.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

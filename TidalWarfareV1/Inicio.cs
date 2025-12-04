@@ -27,6 +27,7 @@ namespace TidalWarfareV1
         private void btnRanking_Click(object sender, EventArgs e)
         {
             Ranking ranking = new Ranking();
+            ranking.Inicio = this;
             ranking.Show();
             this.Hide();
         }

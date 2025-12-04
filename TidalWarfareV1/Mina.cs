@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace TidalWarfareV1
 {
+    /// <summary>
+    /// Representa una mina en el juego que puede explotar y causar daño.    
+    /// </summary>
     internal class Mina : ObjetoGrafico
     {
+        // Indicar si está activa la mina
         private bool activa = true;
-        private const int DANIO_EXPLOSION = 50;
-        public event EventHandler<ExplosionEventArgs> Explosion;
+        // Daño de la explosión
+        private const int Damage_explosion = 50; 
+        // Evento que se dispara cuando la mina explota        
+        public event EventHandler<ExplosionEventArgs> Explosion; 
         public bool Activa => activa;
 
-        public Mina(int x, int y)
-            : base(x, y, 50, 50, "Mina")
+        // Constructor de mina
+        public Mina(int x, int y): base(x, y, 50, 50, "Mina")
         {
         }
 
+        /// <summary>
+        /// Activa la explosión de la mina, crea una animación y notificando el daño
+        /// </summary>
         public void Explotar(Form formulario)
         {
+            // Verificar si la mina está activa
             if (!activa) return;
             activa = false;
 
@@ -30,7 +39,8 @@ namespace TidalWarfareV1
 
             // Crear y configurar la explosión
             var explosion = new Explosion(posicionExplosion);
-            explosion.AnimacionCompletada += (s, e) => {
+            explosion.AnimacionCompletada += (s, e) =>
+            {
                 formulario.Controls.Remove(explosion.Imagen);
                 explosion.Dispose();
             };
@@ -43,29 +53,31 @@ namespace TidalWarfareV1
             Imagen.Visible = false;
 
             // Notificar el daño
-            OnExplosion(new ExplosionEventArgs(GetBounds(), DANIO_EXPLOSION));
+            AlExplotar(new ExplosionEventArgs(GetBounds(), Damage_explosion));
         }
 
-        protected virtual void OnExplosion(ExplosionEventArgs e)
+        /// <summary>
+        /// Método protegido que dispara el evento de explosión
+        /// </summary>
+        protected virtual void AlExplotar(ExplosionEventArgs e)
         {
-            Explosion?.Invoke(this, e);
-        }
-
-        public bool CheckCollision(Rectangle bounds)
-        {
-            return activa && GetBounds().IntersectsWith(bounds);
+            Explosion.Invoke(this, e);
         }
     }
 
+    // Información del evento de la explosión
     public class ExplosionEventArgs : EventArgs
     {
+        // Área afectada de la explosión (hitbox)
         public Rectangle Area { get; }
-        public int Danio { get; }
+        // Daño causado
+        public int Damage { get; }
 
-        public ExplosionEventArgs(Rectangle area, int danio)
+        // Constructor con eventos de la explosión
+        public ExplosionEventArgs(Rectangle area, int damage)
         {
             Area = area;
-            Danio = danio;
+            Damage = damage;
         }
     }
 }

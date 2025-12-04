@@ -4,17 +4,23 @@ using System.Drawing;
 
 namespace TidalWarfareV1
 {
+    /// <summary>
+    /// Clase que representa un Power-Up de curación en el juego.
+    /// Este objeto gráfico puede ser recogido por un navío para restaurar su salud.
+    /// </summary>
     internal class PowerUpCuracion:ObjetoGrafico
     {
-        private int cantidadCuracion = 10;
-        private bool activo = true;
-        private static Random random = new Random();
-        public bool Activo => activo;
+        private int cantidadCuracion = 10; // Cantidad de curación
+        private bool activo = true; // Estado del power-up
+        private static Random random = new Random(); // Instanciar el random para las posiciones        
+        public bool Activo => activo; // Get de Activo
 
-        public PowerUpCuracion(int x, int y) : base(x, y, 40, 40, "Botiquin")
-        {
-        }
+        // Constructor por defecto
+        public PowerUpCuracion(int x, int y) : base(x, y, 40, 40, "Botiquin"){}
 
+        /// <summary>
+        /// Método para que un navío recoja el Power-Up y reciba curación.
+        /// </summary>
         public void Recoger(Navio navio)
         {
             if (!activo) return;
@@ -23,6 +29,12 @@ namespace TidalWarfareV1
             navio.Curar(cantidadCuracion);
         }
 
+        /// <summary>
+        ///  Spawnear en posición aleatoria el power-up evitando las colisiones
+        /// </summary>
+        /// <param name="formSize"></param>
+        /// <param name="objetos"></param>
+        /// <returns></returns>
         public static Point ObtenerPosicionAleatoria(Size formSize, List<ObjetoGrafico> objetos)
         {
             int maxIntentos = 50;

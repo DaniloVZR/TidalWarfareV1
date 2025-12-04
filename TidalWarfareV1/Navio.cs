@@ -1,41 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using TidalWarfareV1;
 
+/// <summary>
+/// Clase que representa un navío en el juego, heredando las propiedades de la clase Entidad.
+/// </summary>
 internal class Navio : Entidad
 {
+    // Propiedades del movimiento
     int velocidad = 4;
-    int posX = 0, posY = 0;
-    public List<Bala> Balas { get => balas; }
+    int posY = 0;    
     private int direccionActual = 1; // Por defecto mirando a la derecha
 
-    // Daño
+    // Propiedades de vida
     private int vidaMaxima = 100;
     private int vidaActual;
     private bool estaVivo = true;
-    public event EventHandler<DanioEventArgs> DanioRecibido;
-    public event EventHandler<DanioEventArgs> CuracionRecibida;
-    public event EventHandler NavioDestruido;
+
+    // Eventos
+    public event EventHandler<DamageEventArgs> DanioRecibido; // Evento disparado al recibir daño
+    public event EventHandler<DamageEventArgs> CuracionRecibida; // Evento disparado al recibir curación
+    public event EventHandler NavioDestruido; // Evento disparado cuando el navío es destruido
 
     // Limitar balas    
     private List<Bala> balas = new List<Bala>();
-    private const int MAXIMO_BALAS = 3;  // Límite de balas
+    private const int MAXIMO_BALAS = 1000;  // Límite de balas
     private Timer timerCooldownDisparo;
     private bool puedeDisparar = true;
     private const int COOLDOWN_DISPARO_MS = 200;  // Medio segundo de cooldown
 
-    // Powerup
-    private Timer timerInvulnerabilidad;
-    private bool esInvulnerable;
+
     public int VidaActual => vidaActual;
     public int VidaMaxima => vidaMaxima;
-    public bool EstaVivo => estaVivo;
-   
 
-    public Navio(Point coor, int w, int h, string nombreRecursoBase, int frames, int Tamframe): base(coor, w, h, nombreRecursoBase, frames, Tamframe)
+
+    /// <summary>
+    /// Constructor que inicializa un navío.
+    /// </summary>
+    public Navio(Point coor, int w, int h, string nombreRecursoBase, int frames, int Tamframe) : base(coor, w, h, nombreRecursoBase, frames, Tamframe)
     {
         vidaActual = vidaMaxima;
 
@@ -50,25 +54,39 @@ internal class Navio : Entidad
             timerCooldownDisparo.Stop();
         };
     }
+
+    /// <summary>
+    /// Método para recibir daño.
+    /// </summary>
+    /// <param name="cantidad">Cantidad de daño recibido.</param>
     public void RecibirDanio(int cantidad)
     {
-        if (!estaVivo) return;
+        if (!estaVivo) return; // No hacer nada si el navío ya está destruido
 
         vidaActual = Math.Max(0, vidaActual - cantidad);
-        DanioRecibido?.Invoke(this, new DanioEventArgs(cantidad));  // Quitar vidaActual
+        DanioRecibido?.Invoke(this, new DamageEventArgs(cantidad));  // Quitar vidaActual
 
         if (vidaActual <= 0)
         {
             estaVivo = false;
-            NavioDestruido?.Invoke(this, EventArgs.Empty);
+            NavioDestruido?.Invoke(this, EventArgs.Empty); // Disparar el evento de destrucción
         }
     }
 
+    /// <summary>
+    /// Método para curar al navío.
+    /// </summary>
+    /// <param name="cantidad">Cantidad de vida restaurada.</param>
     public void Curar(int cantidad)
     {
-        vidaActual = Math.Min(vidaActual + cantidad, vidaMaxima);
-        CuracionRecibida?.Invoke(this, new DanioEventArgs(cantidad, vidaActual));  // Añadir vidaActual aquí también
+        vidaActual = Math.Min(vidaActual + cantidad, vidaMaxima); // Incrementar la vida hasta el máximo permitido
+        CuracionRecibida?.Invoke(this, new DamageEventArgs(cantidad, vidaActual));  // Añadir vidaActual aquí también
     }
+
+    /// <summary>
+    /// Método para disparar una bala desde el navío.
+    /// </summary>
+    /// <param name="formulario">Formulario donde se mostrará la bala.</param>
     public void Disparar(Form formulario)
     {
         // Verificar si puede disparar y si no excede el límite de balas
@@ -79,6 +97,7 @@ internal class Navio : Entidad
 
         Point posicionBala = new Point(Imagen.Location.X + offsetX, Imagen.Location.Y + offsetY);
 
+        // Ajustar la posición de la bala según la dirección actual
         switch (direccionActual)
         {
             case 0: // Izquierda
@@ -95,6 +114,7 @@ internal class Navio : Entidad
                 break;
         }
 
+        // Crea nueva bala
         Bala nuevaBala = new Bala(posicionBala.X, posicionBala.Y, direccionActual);
         balas.Add(nuevaBala);
         formulario.Controls.Add(nuevaBala.Imagen);
@@ -104,6 +124,10 @@ internal class Navio : Entidad
         timerCooldownDisparo.Start();
     }
 
+    /// <summary>
+    /// Actualiza las balas disparadas, eliminando las inactivas.
+    /// </summary>
+    /// <param name="objetos">Lista de objetos gráficos para detectar colisiones.</param>
     public void ActualizarBalas(List<ObjetoGrafico> objetos)
     {
         for (int i = balas.Count - 1; i >= 0; i--)
@@ -113,15 +137,15 @@ internal class Navio : Entidad
                 balas[i].Mover(objetos);
             }
 
-            if (!balas[i].Activa)
+            if (!balas[i].Activa) // Si la bala ya no está activa
             {
                 Form formulario = balas[i].Imagen.FindForm();
                 if (formulario != null)
                 {
-                    formulario.Controls.Remove(balas[i].Imagen);
+                    formulario.Controls.Remove(balas[i].Imagen); // Quita la bala del formulario
                 }
                 balas[i].Imagen.Dispose();
-                balas.RemoveAt(i);
+                balas.RemoveAt(i); // Eliminar la bala de la lista
             }
         }
     }
@@ -175,17 +199,20 @@ internal class Navio : Entidad
     }
 }
 
-public class DanioEventArgs : EventArgs
+/// <summary>
+/// Clase que contiene datos relacionados con eventos de daño o curación.
+/// </summary>
+public class DamageEventArgs : EventArgs
 {
     public int Cantidad { get; private set; }
     public int VidaActual { get; private set; }
 
-    public DanioEventArgs(int cantidad)
+    public DamageEventArgs(int cantidad)
     {
         Cantidad = cantidad;
     }
 
-    public DanioEventArgs(int cantidad, int vidaActual)  // Modificar el constructor
+    public DamageEventArgs(int cantidad, int vidaActual)  // Modificar el constructor
     {
         Cantidad = cantidad;
         VidaActual = vidaActual;

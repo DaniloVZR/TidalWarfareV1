@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TidalWarfareV1
@@ -16,9 +13,8 @@ namespace TidalWarfareV1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Jugar());
+            Application.Run(new Inicio());
         }
-
 
         public static class InformacionJugadores
         {

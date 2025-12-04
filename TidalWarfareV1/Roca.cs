@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace TidalWarfareV1
 {
+    /// <summary>
+    /// Representa las rocas en el juego que el jugador no puede traspasar.    
+    /// </summary>
     internal class Roca : ObjetoGrafico
     {
-        public Roca(int x, int y) : base(x, y, 50, 50, "Roca")
-        {
-
-
-        }
+        public Roca(int x, int y) : base(x, y, 50, 50, "Roca") { }
     }
 }

@@ -37,10 +37,9 @@
             // btnJugar
             // 
             this.btnJugar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnJugar.Location = new System.Drawing.Point(460, 348);
-            this.btnJugar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnJugar.Location = new System.Drawing.Point(345, 283);
             this.btnJugar.Name = "btnJugar";
-            this.btnJugar.Size = new System.Drawing.Size(200, 31);
+            this.btnJugar.Size = new System.Drawing.Size(150, 25);
             this.btnJugar.TabIndex = 0;
             this.btnJugar.Text = "Jugar";
             this.btnJugar.UseVisualStyleBackColor = true;
@@ -49,10 +48,9 @@
             // btnRanking
             // 
             this.btnRanking.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRanking.Location = new System.Drawing.Point(460, 386);
-            this.btnRanking.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRanking.Location = new System.Drawing.Point(345, 314);
             this.btnRanking.Name = "btnRanking";
-            this.btnRanking.Size = new System.Drawing.Size(200, 31);
+            this.btnRanking.Size = new System.Drawing.Size(150, 25);
             this.btnRanking.TabIndex = 1;
             this.btnRanking.Text = "Ranking";
             this.btnRanking.UseVisualStyleBackColor = true;
@@ -62,26 +60,25 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(348, 142);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(226, 115);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(357, 46);
+            this.label1.Size = new System.Drawing.Size(426, 55);
             this.label1.TabIndex = 3;
             this.label1.Text = "TIDAL WARFARE";
             // 
             // Inicio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::TidalWarfareV1.Properties.Resources.BG_inicio;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1112, 567);
+            this.ClientSize = new System.Drawing.Size(834, 461);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRanking);
             this.Controls.Add(this.btnJugar);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Inicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tidal Warfare";

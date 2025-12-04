@@ -4,43 +4,59 @@ using System.Drawing;
 
 namespace TidalWarfareV1
 {
+    /// <summary>
+    /// Representa un proyectil en el juego que puede ser disparado por los navíos.
+    /// Esta clase maneja el movimiento, colisiones y daño de las balas.
+    /// </summary>
     internal class Bala : ObjetoGrafico
     {
-        private int velocidad = 7;
-        private int direccion;
-        private bool activa = true;
-        private Rectangle limitesPantalla;
 
-
-        private int danio = 10; // Daño base de la bala
-        public int Danio => danio;
-
+        private int velocidad = 7; // velocidad del movimiento de la bala
+        private int direccion; // Dirección del movimiento de la bala.
+        private bool activa = true; // Indica si la bala está activa en el juego.
+        private int damage = 10; // Daño que causa la bala al navio        
         public bool Activa { get => activa; set => activa = value; }
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase Bala.
+        /// </summary>
+        /// <param name="x">Posición inicial en el eje X.</param>
+        /// <param name="y">Posición inicial en el eje Y.</param>
+        /// <param name="direccion">Dirección inicial del movimiento (0: Izquierda, 1: Derecha, 2: Abajo, 3: Arriba).</param>     
         public Bala(int x, int y, int direccion) : base(x, y, 15, 15, "Bala")
         {
             this.direccion = direccion;
 
-            // Ajustar la posición inicial según el tamaño
+            // Ajustar la posición inicial según el tamaño y la dirección donde apunta el navío
             switch (direccion)
             {
                 case 0: // Izquierda
-                    setPos(x - 20, y); // Mover la bala más a la izquierda
-                    Imagen.Image.RotateFlip(RotateFlipType.Rotate180FlipX);
+                    setPos(x - 20, y); // Mover la bala más a la izquierda                    
                     break;
                 case 1: // Derecha
                     setPos(x + 20, y); // Mover la bala más a la derecha
                     break;
                 case 2: // Abajo
-                    setPos(x, y + 20); // Mover la bala más abajo
-                    Imagen.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    setPos(x, y + 20); // Mover la bala más abajo                    
                     break;
                 case 3: // Arriba
-                    setPos(x, y - 20); // Mover la bala más arriba
-                    Imagen.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    setPos(x, y - 20); // Mover la bala más arriba                    
                     break;
             }
         }
+
+
+        /// <summary>
+        /// Actualiza la posición de la bala y maneja las colisiones con otros objetos.
+        /// </summary>
+        /// <param name="objetos">Lista de objetos gráficos en el juego para verificar colisiones.</param>
+        /// <remarks>
+        /// El método realiza las siguientes acciones:
+        /// 1. Verifica si la bala está activa
+        /// 2. Calcula la nueva posición según la dirección
+        /// 3. Detecta colisiones con otros objetos
+        /// 4. Si colisiona con un navío, aplica daño y reproduce un sonido
+        /// </remarks>
 
         public void Mover(List<ObjetoGrafico> objetos)
         {
@@ -66,22 +82,18 @@ namespace TidalWarfareV1
             int nuevaX = X + dx;
             int nuevaY = Y + dy;
 
-            // Verificar si la bala está fuera de la pantalla para mirar esta parte
-            if (nuevaX < 0 || nuevaX > 800 || nuevaY < 0 || nuevaY > 600)
-            {
-                activa = false;
-                return;
-            }
-
             // Verificar colisiones con otros objetos
             Rectangle nuevaPosicion = new Rectangle(nuevaX, nuevaY, w, h);
             foreach (ObjetoGrafico obj in objetos)
             {
+                
                 if (obj != this && !(obj is Bala) && nuevaPosicion.IntersectsWith(obj.GetBounds()))
                 {
                     if (obj is Navio navio)
                     {
-                        navio.RecibirDanio(danio);
+                        Audio audio = new Audio(5);
+                        audio.ReproducirAudio();
+                        navio.RecibirDanio(damage);
                     }
                     activa = false;
                     return;

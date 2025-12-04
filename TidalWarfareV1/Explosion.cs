@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
 namespace TidalWarfareV1
 {
+    /// <summary>
+    /// Clase que maneja la animación de una explosión en el juego.    
+    /// </summary>
     internal class Explosion : Entidad
     {
-        private Timer timerExplosion;
+        // Timer que controla la velocidad de la animación de la explosión
+        private Timer timerExplosion;        
+        // Evento que se dispara cuando la animación de la explosión ha terminado.                
         public event EventHandler AnimacionCompletada;
 
         public Explosion(Point posicion)
@@ -14,7 +18,6 @@ namespace TidalWarfareV1
         {
             ConfigurarTimer();
         }
-
         private void ConfigurarTimer()
         {
             timerExplosion = new Timer();
@@ -22,23 +25,24 @@ namespace TidalWarfareV1
             timerExplosion.Tick += TimerExplosion_Tick;
             timerExplosion.Start();
         }
-
         private void TimerExplosion_Tick(object sender, EventArgs e)
         {
+            // Siguiente animación
             Animacion();
-
-            // Cuando llegamos al último frame
+            // Cuando llegamos al último frame detiene la animación
             if (conFrame == 0)
             {
                 timerExplosion.Stop();
-                AnimacionCompletada?.Invoke(this, EventArgs.Empty);
+                AnimacionCompletada.Invoke(this, EventArgs.Empty);
             }
         }
-
+        /// <summary>
+        /// Método para liberar los recursos utilizados por la explosión        
+        /// </summary>
         public void Dispose()
         {
-            timerExplosion?.Stop();
-            timerExplosion?.Dispose();
+            timerExplosion.Stop();
+            timerExplosion.Dispose();
             Imagen?.Dispose();
         }
     }
